@@ -48,7 +48,7 @@ export const NuevoPaqueteForm = () => {
     }
 
 
-    const disableSubmitButton = (origen!=="" && destino!=="" && valor>=1 && bultos >=1)?true: false;
+    const disableSubmitButton = (origen!=="" && destino!=="" && valor>=1 && bultos >=1 && origen!==destino ) ?true: false;
 
   return (
     <>
@@ -83,7 +83,8 @@ export const NuevoPaqueteForm = () => {
 
                     <div className="form-group col">
                         <label >Origen</label>
-                        <input id="ogigen" name="origen" value={ (localStorage.getItem("origen") !== "" )? localStorage.getItem("origen") : origen}  required onChange={handleInputChange} type="text" className="form-control" placeholder="Origen" />
+                        {/* <input id="origen" name="origen" value={ (localStorage.getItem("origen") !== "" )? localStorage.getItem("origen") : origen}  required onChange={handleInputChange} type="text" className="form-control" placeholder="Origen" /> */}
+                        <input id="origen" name="origen" value={ origen}  required onChange={handleInputChange} type="text" className="form-control" placeholder="Origen" />
                     </div>
                     
                     <div className="form-group col">
