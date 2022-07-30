@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -35,4 +36,25 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.container{
+  background-color: rgba(11, 128, 211, 0.067);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 20px;
+  margin-left: 100px;
+}
+
+.container__form {
+    width: 100%;
+    align-self: flex-start;
+    padding: 10px;
+}
+
+
+
+.custom-select {
+  width: 90%;
 }
