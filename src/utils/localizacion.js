@@ -1,3 +1,15 @@
+const calcularDireccion = async( lat, lon ) => {
+       
+    const direccion = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=c08d0f2842dfb61e96bad69fa449eef4`)
+    const ubicacion = await direccion.json();
+    const ciudad = ubicacion[0].name;
+    localStorage.setItem("origen" ,ciudad)
+    // alert(`Origen: ${ciudad}`)
+    
+    console.log(ciudad);
+    return ciudad;
+
+}
 const onUbicacionConcedida = async ubicacion => {
     console.log("Tengo la ubicación: ", ubicacion);
     const {latitude,  longitude  } = ubicacion.coords;
@@ -9,16 +21,6 @@ const onErrorDeUbicacion = err => {
 }
 
 
-const calcularDireccion = async( lat, lon ) => {
-       
-    const direccion = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=c08d0f2842dfb61e96bad69fa449eef4`)
-    const ubicacion = await direccion.json();
-    const ciudad = ubicacion[0].name;
-    alert(`Origen: ${ciudad}`)
-    return ciudad;
-    // console.log(ciudad);
-
-}
 
 
 const opcionesDeSolicitud = {

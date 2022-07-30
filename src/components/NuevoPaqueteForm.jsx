@@ -9,7 +9,7 @@ export const NuevoPaqueteForm = () => {
     
     useEffect(() => {
         obtenerClientes();
-        console.log(getLocation()) ;        
+        getLocation();        
     }, [])
     
 
@@ -83,7 +83,7 @@ export const NuevoPaqueteForm = () => {
 
                     <div className="form-group col">
                         <label >Origen</label>
-                        <input id="ogigen" name="origen" value={origen}  required onChange={handleInputChange} type="text" className="form-control" placeholder="Origen" />
+                        <input id="ogigen" name="origen" value={ (localStorage.getItem("origen") !== "" )? localStorage.getItem("origen") : origen}  required onChange={handleInputChange} type="text" className="form-control" placeholder="Origen" />
                     </div>
                     
                     <div className="form-group col">
