@@ -4,13 +4,31 @@ import {getClientes, savePaquete} from '../api';
 import { getLocation } from '../utils/localizacion';
 
 export const NuevoPaqueteForm = () => {
-
-    const [clientes, setClientes] = useState([])
     
     useEffect(() => {
+
         obtenerClientes();
-        getLocation();        
+        getLocation();      
+        getCiudad();
+    
     }, [])
+    
+    const initPaquete = {
+        origen: "",
+        destino: "",
+        peso: 1,
+        valor:1,
+        bultos:1,
+        id_cliente:1
+    }
+    //const [ formValues, handleInputChange, reset ] = useForm(initPaquete)
+    
+    // const [id_cliente, setIdCliente] = useState(1)
+    
+    const [clientes, setClientes] = useState([])
+    const [paquete, setPaquete] = useState(initPaquete)
+    let {origen,  destino,  peso,   valor,  bultos, id_cliente} = paquete;
+    
     
 
     const obtenerClientes = async () => {
@@ -18,34 +36,40 @@ export const NuevoPaqueteForm = () => {
         setClientes(clientes.clientes)
     }
 
-    const initPaquete = {
-        origen: "",
-        destino: "",
-        peso: 1,
-        valor:1,
-        bultos:1,
+    const handleInputChange = ({ target }) => {
+        console.log('target: ', typeof target)
+        setPaquete({
+            ...paquete,
+            [ target.name ]: target.value
+        })
+        
+
     }
-
-    const [ formValues, handleInputChange, reset ] = useForm(initPaquete)
-    const {origen,  destino,  peso,   valor,  bultos,} = formValues;
-
-    const [id_cliente, setIdCliente] = useState(1)
    
     const handleClienteChange = (e) => {
-        // console.log(e.target.value);
-        setIdCliente(e.target.value)
+        // setIdCliente(e.target.value);
+        setPaquete({...paquete, id_cliente: e.target.value})
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let paquete = {
-            ...formValues,
+        let paqueteBody = {
+            ...paquete,
             id_cliente
         }
-        await savePaquete(paquete);
-        reset();
+        await savePaquete(paqueteBody);
+
+        const {origen, ...resto} = initPaquete 
+        const ciudad = localStorage.getItem("origen");
+        setPaquete({origen:ciudad, ...resto});
     
     }
+
+    const getCiudad = () => {
+        const ciudad = localStorage.getItem("origen");
+        setPaquete({...paquete, origen: ciudad})
+        
+    } 
 
 
     const disableSubmitButton = (origen!=="" && destino!=="" && valor>=1 && bultos >=1 && origen!==destino ) ?true: false;
@@ -65,7 +89,7 @@ export const NuevoPaqueteForm = () => {
                             <label className="input-group-text" >Cliente</label>
                         </div>
                         <select value={id_cliente} id="clientes" className="custom-select " onChange={ (e) => handleClienteChange(e)} >
-                            {/* <option selected>Escoger cliente...</option> */}
+                            <option  value={1} selected>Escoger cliente...</option>
                             {
                                 clientes?.map(cli => (
                                     <option key={cli.id} value={cli.id}>{cli.nombre}</option>

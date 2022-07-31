@@ -39,16 +39,17 @@
 }
 
 .container{
-  background-color: rgba(11, 128, 211, 0.067);
+  background-color: rgba(12, 75, 236, 0.067);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin: 20px;
   margin-left: 100px;
+  justify-content: center;
 }
 
 .container__form {
-    width: 100%;
+    width: 50%;
     align-self: flex-start;
     padding: 10px;
 }
@@ -56,7 +57,7 @@
 
 
 .custom-select {
-  width: 90%;
+  width: 80%;
 }
 
 

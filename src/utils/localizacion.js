@@ -6,8 +6,6 @@ const calcularDireccion = async( lat, lon ) => {
     localStorage.setItem("origen" ,ciudad)
     // alert(`Origen: ${ciudad}`)
     // const field = document.getElementById("origen");
-    document.getElementById("origen").value = ciudad;
-    console.log(ciudad);
     return ciudad;
 
 }
@@ -20,7 +18,6 @@ const onUbicacionConcedida = async ubicacion => {
 const onErrorDeUbicacion = err => {
     console.log("Error obteniendo ubicación: ", err);
 }
-
 
 
 
